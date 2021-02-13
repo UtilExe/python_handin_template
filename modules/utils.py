@@ -15,8 +15,16 @@ def get_all_file_names(folderpath,out='python_handin_template/output2.txt'):
             for name in files:
                 file_object.write(str(name) + '\n')
 
-def print_line_one(file_names):
+# not sure if this is the right way. using the * abritary function parameter.
+def print_line_one(*file_names):
     """takes a list of filenames and print the first line of each"""
+    lines = []
+    for file in file_names:
+        with open(file) as file_object:
+            lines.append("File: " + file +": " + file_object.readline())
+    
+    for line in lines:
+        print(line.rstrip())
 
 def print_emails(file_names):
     """takes a list of filenames and print each line that contains an email (just look for @)"""
