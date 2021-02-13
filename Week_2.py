@@ -26,7 +26,7 @@ def print_file_content():
         for row in reader:
             print('Row #' + str(reader.line_num) + ' ' + str(row))
 
-print_file_content()
+#print_file_content()
 
 # THROUGH file on PC (note: the file contains different csv content/data):
 
@@ -38,7 +38,7 @@ def print_file_content_2(path):
         for row in reader:
             print('Row #' + str(reader.line_num) + ' ' + str(row))
 
-# print_file_content_2('C:/Users/Emil/Desktop/Skole/Python/Materiale/tracking.csv');
+#print_file_content_2('python_handin_template/file_data/tracking.csv');
 
 # B.: def write_list_to_file(output_file, lst) that can take a list of tuple and write each element to a new line in file
 
@@ -52,7 +52,7 @@ def write_list_to_file(output_file, tupleL):
 
 tupleList = ('hello', 'there', 'how', 1, 6, 7, 9, 11)
 
-write_list_to_file('C:/Users/Emil/Desktop/Skole/Python/Materiale/datamsg.txt', tupleList)
+write_list_to_file('python_handin_template/file_data/datamsg.txt', tupleList)
 
 # B.a: rewrite the function so that it gets an arbitrary number of strings instead of a list
 
@@ -63,7 +63,7 @@ def write_list_to_file_arbitrary(output_file, *numbers):
             # "write() argument must be str, not int"next manually converting to str.
             file_object.write(str(numb) + '\n')
 
-write_list_to_file_arbitrary('C:/Users/Emil/Desktop/Skole/Python/Materiale/datamsg2.txt', 'hello', 'there', 'how', 1, 6, 7, 9, 11, "new")
+write_list_to_file_arbitrary('python_handin_template/file_data/datamsg2.txt', 'hello', 'there', 'how', 1, 6, 7, 9, 11, "new")
 
 
 # C. def read_csv(input_file) that take a csv file and read each row into a list:
@@ -85,7 +85,7 @@ def read_csv(input_file):
         print(items)
  #   print(rowList)
 
-read_csv('C:/Users/Emil/Desktop/Skole/Python/Materiale/data.csv');
+read_csv('python_handin_template/file_data/data.csv');
 
 
 # 2. Add a functionality so that the file can be called from cli with 2 arguments
@@ -124,3 +124,9 @@ if __name__ == '__main__':
          #   lst.extend(args.list)
          # print('LISTEN:',lst)
         write_list_to_file(args.output_file, args.list)
+
+# Exercise 2
+from modules import utils
+print("Exercise 2")
+utils.get_file_names('./')
+utils.get_all_file_names('./')

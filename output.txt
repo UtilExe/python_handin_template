@@ -1,0 +1,85 @@
+.cache
+.gitconfig
+.ipynb_checkpoints
+.ipython
+.jupyter
+.keras
+.local
+.mozilla
+.python_history
+.theano
+.vscode-server
+.wget-hsts
+01-0 Getting Started with installations etc.ipynb
+01-0 Test setup.ipynb
+01-1 Intro.ipynb
+01-2 Python language features.ipynb
+01-3 Python data structures (lists and tuples).ipynb
+01-4 Data structures (Dictionaries).ipynb
+01-Exercise.ipynb
+02-0a Loops.ipynb
+02-0b Functions.ipynb
+02-0c Modules.ipynb
+02-1_argparse.ipynb
+02-2 Working with Files.ipynb
+02-Exercise.ipynb
+03-1 Object-oriented Programming.ipynb
+03-2 Exceptions.ipynb
+03-3 Plotting.ipynb
+03-Exercise.ipynb
+04 Numpy.ipynb
+04-Exercise.ipynb
+05-1 DateTime.ipynb
+05-2 pandas.ipynb
+05-3 Subprocess.ipynb
+05-Exercise.ipynb
+06-1 Iterators and Generators.ipynb
+06-2 Requests.ipynb
+06-3 Concurrency vs Paralelism.ipynb
+06-Exercise.ipynb
+07-1 webscraping.ipynb
+07-2 Regular Expressions.ipynb
+07-3 selenium.ipynb
+08 Data Persistence.ipynb
+08-2 Web services.ipynb
+09-1 sets.ipynb
+09-2 graphs and pagerank.ipynb
+10-0-Mashine-Learning-basics-and-Feature-spaces.ipynb
+10-1-Linear-Algebra.ipynb
+10-2-Linear-Regression-model-sklearn.ipynb
+11-0 Model Validation.ipynb
+11-1 Clustering With MeanShift.ipynb
+11-2 Clustering Titanic example.ipynb
+11-3 Classification model.ipynb
+12-1-Perceptron-Classifier.ipynb
+12-2-Exercise-Perceptrons.ipynb
+13-1-Neural-Networks.ipynb
+13-2-Exercise-handwritten-numbers.ipynb
+14-1-OpenCV.ipynb
+14-2 Movement Detection.ipynb
+14-3-Object recognition.ipynb
+3d_histo.png
+3d_histo2.png
+agendas
+API_EN.ATM.CO2E.KT_DS2_en_csv_v2_1345584.csv
+API_MS.MIL.XPND.CN_DS2_en_csv_v2_1350889.csv
+CAN.csv
+data
+exam_questions.md
+flask
+hello.py
+hello2.py
+images
+Metadata_Country_API_EN.ATM.CO2E.KT_DS2_en_csv_v2_1345584.csv
+Metadata_Country_API_MS.MIL.XPND.CN_DS2_en_csv_v2_1350889.csv
+Metadata_Indicator_API_EN.ATM.CO2E.KT_DS2_en_csv_v2_1345584.csv
+Metadata_Indicator_API_MS.MIL.XPND.CN_DS2_en_csv_v2_1350889.csv
+modules
+my_notebooks
+output.txt
+python_handin_template
+simple_digit_trainingset.csv
+squares_plot.png
+unisex_navne.xls
+wget-log
+wget-log.1
