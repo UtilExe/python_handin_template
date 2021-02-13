@@ -1,6 +1,6 @@
-hello
-there
-how
+hi
+im
+data
 1
 6
 7
