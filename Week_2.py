@@ -50,7 +50,7 @@ def write_list_to_file(output_file, tupleL):
             file_object.write(str(numb) + '\n')
 
 
-tupleList = ('hello', 'there', 'okay', 1, 6, 7, 9, 11)
+tupleList = ('hello', 'there', 'okay', 1, 6, 7, 9, 11, "hello@hotmail.com")
 
 write_list_to_file('python_handin_template/file_data/datamsg.txt', tupleList)
 
@@ -63,7 +63,7 @@ def write_list_to_file_arbitrary(output_file, *numbers):
             # "write() argument must be str, not int"next manually converting to str.
             file_object.write(str(numb) + '\n')
 
-write_list_to_file_arbitrary('python_handin_template/file_data/datamsg2.txt', 'hi', 'im', 'data', 1, 6, 7, 9, 11, "new")
+write_list_to_file_arbitrary('python_handin_template/file_data/datamsg2.txt', 'hi', 'im', 'data', 1, 6, 7, 9, 11, "new", "test@gmail.com")
 
 
 # C. def read_csv(input_file) that take a csv file and read each row into a list:
@@ -128,6 +128,13 @@ if __name__ == '__main__':
 # Exercise 2
 from modules import utils
 print("Exercise 2")
+print("Get file names (writing to file output.txt)")
 utils.get_file_names('./')
+print("Get all file names (writing to file output2.txt")
 utils.get_all_file_names('./')
+print("Print first line of file:")
 utils.print_line_one('python_handin_template/file_data/datamsg2.txt', 'python_handin_template/file_data/datamsg.txt')
+print("Print all rows containing email (@ validation):")
+utils.print_emails('python_handin_template/file_data/datamsg2.txt', 'python_handin_template/file_data/datamsg.txt')
+print("Print all rows containing headline of MD files (# validation):")
+utils.write_headlines('python_handin_template/README.md', 'python_handin_template/file_data/README.md')
