@@ -26,7 +26,7 @@ def print_file_content():
         for row in reader:
             print('Row #' + str(reader.line_num) + ' ' + str(row))
 
-#print_file_content()
+print_file_content()
 
 # THROUGH file on PC (note: the file contains different csv content/data):
 
