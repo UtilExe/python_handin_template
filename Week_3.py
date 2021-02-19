@@ -27,7 +27,7 @@ class Student():
 
     def get_avg_grade(self):
        if self.data_sheet.get_grades_as_list():
-           average_grade = sum(self.data_sheet.get_grades_as_list()) / len(self.data_sheet.get_grades_as_list())
+         average_grade = sum(self.data_sheet.get_grades_as_list()) / len(self.data_sheet.get_grades_as_list())
        return average_grade;
 
 class DataSheet():
@@ -42,7 +42,7 @@ class DataSheet():
         return grades_as_list;
 
 class Course():
-    def __init__(self, name, classroom, teacher, ETCS, grade=None):
+    def __init__(self, name, classroom, teacher, ETCS, grade=0):
         self.name = name
         self.classroom = classroom
         self.teacher = teacher
@@ -68,7 +68,6 @@ names = [
     'Jacob'
 ]
 
-
 # 7. Create a function that can generate n number of students with random: name, gender, courses (from a fixed list of course names), grades, img_url
 def create_students(amount):
     # issue atm: sometimes the same course name and data gets added twice.
@@ -76,7 +75,9 @@ def create_students(amount):
     for i in range(amount):
         students_courses = []
         for r in range(random.randrange(1, len(courses))):
-            students_courses.append(random.choice(courses))
+            rand_course = random.choice(courses)
+            if rand_course not in students_courses:
+                students_courses.append(rand_course)
         
         for course in students_courses:
             course.grade = random.choice(grades)
@@ -95,19 +96,42 @@ def create_students(amount):
     else:
         newline=None
     
-    with open('python_handin_template/output.csv', 'w') as file_object:
+    with open('python_handin_template/output.csv', 'w', newline=newline) as file_object:
+        output_writer = csv.writer(file_object)
         for stud in students:
             for course in students_courses:
-            # is there a better way to retrieve data, than cherry picking the attributes 1 by 1? __dict__ seems to be an option.
-            #                     stud_name,        course_name,        teacher,               ETCS,                    classroom,               grade,                    img_url
-                file_object.write(str(stud.name + "," + course.name + "," + course.teacher + "," + str(course.ETCS) + "," + course.classroom + "," + str(course.grade) + "," + stud.image_url) + '\n')
+                
+                output_writer.writerow([stud.name, stud.gender, course.name, course.teacher, course.ETCS, course.classroom, course.grade, stud.image_url])
+
+    # 8. Read student data into a list of Students from a csv file:
+#    A. loop through the list and print each student with name, img_url and avg_grade.
+#    B. sort the list by avg_grade
+#    C. create a bar chart with student_name on x and avg_grade on y-axis
+    student_entry_data = []
+    aStudent = Student;
+
+    with open('python_handin_template/output.csv') as f:
+        students = []
+        reader = csv.reader(f)
+     #   header_row = next(reader)
+        coursesData = []
+        gradeList = []
+        for row in reader:
+            print(row)
+            coursesData.append(Course(row[2], row[5], row[3], row[4], int(row[6])))
+            data_sheet = DataSheet(coursesData)
+            aStudent = Student(row[0], row[1], data_sheet, row[7])
+            students.append(aStudent)
+
+    for student in students:
+       print(student.name, student.image_url, student.get_avg_grade())
 
     return students;
     
-students = create_students(2)
+students = create_students(1)
 
-for student in students:
-    for course in student.data_sheet.courses:
-        print("Student:", student.name, ", Course:", course.name, ", Grade:", course.grade)
-    print("The Average grade:", student.get_avg_grade())
-    #print("List of grades: ", student.data_sheet.get_grades_as_list())
+#for student in students:
+#    for course in student.data_sheet.courses:
+#        print("Student:", student.name, ", Course:", course.name, ", Grade:", course.grade)
+#    print("The Average grade:", student.get_avg_grade())
+#    print("List of grades: ", student.data_sheet.get_grades_as_list())
