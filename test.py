@@ -80,6 +80,46 @@ def writeToCSV(students):
                 ])
     return students;
 
+def readFromCSV():
+    # 8. Read student data into a list of Students from a csv file:
+    aStudent = Student;
+    old_name = ""
+    remove_related_course = False;
+
+    with open('python_handin_template/output.csv') as f:
+        students = []
+        reader = csv.reader(f)
+        coursesData = []
+        for row in reader:
+            # data fields:
+            stud_name = row[0]
+            gender = row[1]
+            course_name = row[2]
+            classroom = row[3]
+            teacher = row[4]
+            ECTS = row[5]
+            grade = int(row[6])
+            image_url = row[7]
+            
+            if stud_name != old_name: # we check if a course belongs to a certain student. if it doesn't, we make a new courseData array, instead of using the existing.
+                coursesData = []
+                coursesData.append(Course(course_name, classroom, teacher, ECTS, grade))
+                old_name = stud_name;
+            else:
+                # means that it's the same student. we consider 'name' as the uid.
+                coursesData.append(Course(course_name, classroom, teacher, ECTS, grade))
+                # we should remove the previous course, because otherwise the student will get two entries with the 2 courses. 
+                remove_related_course = True;
+
+            data_sheet = DataSheet(coursesData)
+            aStudent = Student(stud_name, gender, data_sheet, image_url)
+
+            if remove_related_course:
+                students.pop() # now the student that had multiple courses, will only have it appearing once. (removing the last element - which was the course for the same student, to prevent duplicate)
+
+            students.append(aStudent)
+        return students;
+    
 
 # 7. Create a function that can generate n number of students with random: name, gender, courses (from a fixed list of course names), grades, img_url
 def random_students(amount):
@@ -106,25 +146,12 @@ def random_students(amount):
         student_list.append(random_student)
 
         writeToCSV(student_list)
+        
+        # 8.
+        students = readFromCSV()
 
-    # 8. Read student data into a list of Students from a csv file:
-    aStudent = Student;
-
-    with open('python_handin_template/output.csv') as f:
-        students = []
-        reader = csv.reader(f)
-        coursesData = []
-        gradeList = []
-        for row in reader:
-            #print(row)
-            coursesData.append(Course(row[2], row[3], row[4], row[5], int(row[6]))) # maybe there's a better way to select specific rows? (eg. if the rows change in the future, it'll be horrible to correct)
-            data_sheet = DataSheet(coursesData)
-            aStudent = Student(row[0], row[1], data_sheet, row[7])
-            students.append(aStudent)
-
-    for student in students: # note: if a student has two courses, it will pop up twice, cause it's added like that in the CSV.
-        # PROBLEM: the problem is that when retrieving like this, the get_avg_grade() will calculate for all, and .courses will show courses for all. eg:
-        # 'Hans' has 2 courses, 'Carl' has 1 course. Yet, if we retrieve the element like this, 'Carl' will appear with 2 courses as well.
+    # 8.A. loop through the list and print each student with name, img_url and avg_grade.
+    for student in students: 
        print("#####", student.name, student.image_url, student.get_avg_grade(), student.data_sheet.courses)
 
 
@@ -134,4 +161,4 @@ student_list = random_students(2)
 
 # for 7, just to show that it matches the CSV file.
 for stud in student_list:
-    print("Name:", stud[0].name, ", Gender:", stud[0].gender, ", Courses:", stud[0].data_sheet.courses, ", Image url:", stud[0].image_url)
+   print("Name:", stud[0].name, ", Gender:", stud[0].gender, ", Courses:", stud[0].data_sheet.courses, ", Image url:", stud[0].image_url)
