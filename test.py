@@ -120,6 +120,11 @@ def readFromCSV():
             students.append(aStudent)
         return students;
     
+def sort_students_from_grade(students):
+        #students_sorted = sorted(students, key=float student.get_avg_grade(), reverse = True)
+        # lamba logic based on https://stackoverflow.com/a/39005864/14928754. todo: read up on lambda.
+    students_sorted = sorted(students, key=lambda student: student.get_avg_grade(), reverse=True)
+    return students_sorted
 
 # 7. Create a function that can generate n number of students with random: name, gender, courses (from a fixed list of course names), grades, img_url
 def random_students(amount):
@@ -151,8 +156,15 @@ def random_students(amount):
         students = readFromCSV()
 
     # 8.A. loop through the list and print each student with name, img_url and avg_grade.
-    for student in students: 
+    for student in students:
        print("#####", student.name, student.image_url, student.get_avg_grade(), student.data_sheet.courses)
+    
+    #8.B. sort the list by avg_grade
+    sortedList = sort_students_from_grade(students)
+    for sort in sortedList:
+        print("*****:", sort.name, sort.image_url, sort.data_sheet.courses)
+
+    #8.C. create a bar chart with student_name on x and avg_grade on y-axis
 
 
     return student_list;
@@ -160,5 +172,5 @@ def random_students(amount):
 student_list = random_students(2)
 
 # for 7, just to show that it matches the CSV file.
-for stud in student_list:
-   print("Name:", stud[0].name, ", Gender:", stud[0].gender, ", Courses:", stud[0].data_sheet.courses, ", Image url:", stud[0].image_url)
+#for stud in student_list:
+   #print("Name:", stud[0].name, ", Gender:", stud[0].gender, ", Courses:", stud[0].data_sheet.courses, ", Image url:", stud[0].image_url)
