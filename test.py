@@ -119,12 +119,17 @@ def readFromCSV():
 
             students.append(aStudent)
         return students;
-    
+
+# #8.B. sort the list by avg_grade
 def sort_students_from_grade(students):
         #students_sorted = sorted(students, key=float student.get_avg_grade(), reverse = True)
         # lamba logic based on https://stackoverflow.com/a/39005864/14928754. todo: read up on lambda.
     students_sorted = sorted(students, key=lambda student: student.get_avg_grade(), reverse=True)
     return students_sorted
+
+#8.C. create a bar chart with student_name on x and avg_grade on y-axis 
+def bar_chart_name_avggrade():
+    return None;
 
 # 7. Create a function that can generate n number of students with random: name, gender, courses (from a fixed list of course names), grades, img_url
 def random_students(amount):
@@ -165,6 +170,7 @@ def random_students(amount):
         print("*****:", sort.name, sort.image_url, sort.data_sheet.courses)
 
     #8.C. create a bar chart with student_name on x and avg_grade on y-axis
+    
 
 
     return student_list;
