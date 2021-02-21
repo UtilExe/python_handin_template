@@ -94,7 +94,6 @@ def readFromCSV():
     # 8. Read student data into a list of Students from a csv file:
     aStudent = Student;
     old_name = ""
-    dont_remove_previous_student = True;
     students = []
 
     with open('output.csv') as f:
@@ -134,8 +133,29 @@ def sort_students_from_grade(students):
     return students_sorted
 
 #8.C. create a bar chart with student_name on x and avg_grade on y-axis 
-def bar_chart_name_avggrade():
-    return None;
+def bar_chart_student(students):
+    fig = plt.figure()
+    width = 0.35  # the width of the bars
+    ax = fig.add_axes([0, 0, 1, 1])
+    x_value = [student.name for student in students]
+    y_value = [student.get_avg_grade() for student in students]
+    ax.bar(x_value, y_value)
+    ax.set_title('Bar chart with student name and avg_grade')
+    ax.set_ylabel('Average grade')
+    ax.set_xlabel('Student name(s)')
+    plt.show()
+    
+def bar_chart_progression(student_list):
+    fig = plt.figure()
+    width = 0.35  # the width of the bars
+    ax = fig.add_axes([0, 0, 1, 1])
+    x_value = [student.progress_of_study_percent() for student in student_list]
+    y_value = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    ax.bar(x_value, y_value)
+    ax.set_title('Bar chart with student name and avg_grade')
+    ax.set_ylabel('Average grade')
+    ax.set_xlabel('Student name(s)')
+    plt.show()
 
 # 7. Create a function that can generate n number of students with random: name, gender, courses (from a fixed list of course names), grades, img_url
 def random_students(amount):
@@ -177,7 +197,9 @@ def random_students(amount):
         print("*****:", sort.name, sort.image_url, sort.data_sheet.courses)
 
     #8.C. create a bar chart with student_name on x and avg_grade on y-axis
+    bar_chart_student(students)
     
+    bar_chart_progression(student_list)
 
 
     return student_list;
