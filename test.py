@@ -30,6 +30,16 @@ class Student():
            average_grade = sum(self.data_sheet.get_grades_as_list()) / len(self.data_sheet.get_grades_as_list())
        return average_grade;
 
+       # 9. Make a method on Student class that can show progression of the study in % (add up ECTS from all passed courses 
+    # divided by total of 150 total points (equivalent to 5 semesters))
+    def progress_of_study_percent(self):
+        result = 0
+        total_points = 150
+        for course in self.data_sheet.courses:
+            result += course.ETCS
+        result = ((result/total_points) * 100)
+        return result
+
 class DataSheet():
     def __init__(self, courses):
         self.courses = courses;
@@ -69,7 +79,7 @@ def writeToCSV(students):
     else:
         newline=None
     
-    with open('python_handin_template/output.csv', 'w', newline=newline) as file_object:
+    with open('output.csv', 'w', newline=newline) as file_object:
         output_writer = csv.writer(file_object)
         
         for stud in students:
@@ -84,10 +94,10 @@ def readFromCSV():
     # 8. Read student data into a list of Students from a csv file:
     aStudent = Student;
     old_name = ""
-    remove_related_course = False;
+    dont_remove_previous_student = True;
+    students = []
 
-    with open('python_handin_template/output.csv') as f:
-        students = []
+    with open('output.csv') as f:
         reader = csv.reader(f)
         coursesData = []
         for row in reader:
@@ -104,18 +114,14 @@ def readFromCSV():
             if stud_name != old_name: # we check if a course belongs to a certain student. if it doesn't, we make a new courseData array, instead of using the existing.
                 coursesData = []
                 coursesData.append(Course(course_name, classroom, teacher, ECTS, grade))
-                old_name = stud_name;
             else:
                 # means that it's the same student. we consider 'name' as the uid.
                 coursesData.append(Course(course_name, classroom, teacher, ECTS, grade))
-                # we should remove the previous course, because otherwise the student will get two entries with the 2 courses. 
-                remove_related_course = True;
-
+                students.pop(); # remove the previous (same) student (same name), to prevent duplicates.
+                
+            old_name = stud_name;
             data_sheet = DataSheet(coursesData)
             aStudent = Student(stud_name, gender, data_sheet, image_url)
-
-            if remove_related_course:
-                students.pop() # now the student that had multiple courses, will only have it appearing once. (removing the last element - which was the course for the same student, to prevent duplicate)
 
             students.append(aStudent)
         return students;
@@ -140,9 +146,9 @@ def random_students(amount):
         random_grades = [0, 2, 4, 7, 10, 12]
         random_images = ['https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg', 'https://www.computerhope.com/jargon/r/random-dice.jpg']
         random_courses = [
-        Course('Fullstack JavaScript', '272Z', 'Lars', 100, random.choice(random_grades)), 
-        Course('IT-Security', '1W', 'Daniel', 100, random.choice(random_grades)),
-        Course('Python', '232D', 'Thomas', 100, random.choice(random_grades))
+        Course('Fullstack JavaScript', '272Z', 'Lars', 10, random.choice(random_grades)), 
+        Course('IT-Security', '1W', 'Daniel', 30, random.choice(random_grades)),
+        Course('Python', '232D', 'Thomas', 45, random.choice(random_grades))
         ]
         
         ## this code-block prevents duplicates on the randomizing
@@ -155,10 +161,11 @@ def random_students(amount):
         
         student_list.append(random_student)
 
-        writeToCSV(student_list)
-        
+    writeToCSV(student_list)   
         # 8.
-        students = readFromCSV()
+    students = readFromCSV()
+    
+    print(len(students))
 
     # 8.A. loop through the list and print each student with name, img_url and avg_grade.
     for student in students:
@@ -175,8 +182,9 @@ def random_students(amount):
 
     return student_list;
 
-student_list = random_students(2)
+student_list = random_students(3)
 
 # for 7, just to show that it matches the CSV file.
-#for stud in student_list:
-   #print("Name:", stud[0].name, ", Gender:", stud[0].gender, ", Courses:", stud[0].data_sheet.courses, ", Image url:", stud[0].image_url)
+for stud in student_list:
+   print("Name:", stud[0].name, ", Gender:", stud[0].gender, ", Courses:", stud[0].data_sheet.courses, ", Image url:", stud[0].image_url)
+   print(stud[0].name, "has following study progression in %:", stud[0].progress_of_study_percent(), "%")
