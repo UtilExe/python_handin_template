@@ -2512,3 +2512,11 @@ JavaScript warning: https://www.just-eat.dk/Diamons-and-and-Malc-Len-Remore-to-h
 * WebglAllowWindowsNativeGl:false restricts context creation on this system.
 * Exhausted GL driver options.
 console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+Gdk-Message: 21:25:31.152: firefox: Fatal IO error 11 (Resource temporarily unavailable) on X server host.docker.internal:0.
+
+Gdk-Message: 21:25:31.152: /usr/lib/firefox/firefox: Fatal IO error 11 (Resource temporarily unavailable) on X server host.docker.internal:0.
+
+Exiting due to channel error.
+Exiting due to channel error.
+Sandbox: Unexpected EOF, op 0 flags 02000000 path /etc/localtime
+Sandbox: Unexpected EOF, op 0 flags 02000000 path /etc/localtime
