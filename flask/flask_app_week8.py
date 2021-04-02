@@ -9,6 +9,7 @@ SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://root:root@db/cars"
 engine = s_a.create_engine(SQLALCHEMY_DATABASE_URL)
 connection = engine.connect()
 
+# Opg2 Lav et GET-endpoint "/cars/{id}" som viser en bil med det givne ID.
 @app.route('/cars/<int:id>', methods=['GET'])
 def retrieveCarById(id):
     query = 'select * from the_cars where id = ' + str(id)
@@ -29,7 +30,7 @@ def retrieveCarById(id):
         
     return jsonify(car)
 
-# Lav et POST-endpoint "cars/add" som tilføjer en ny bil til database ved følgende JSON-format:
+# Opg 3 Lav et POST-endpoint "cars/add" som tilføjer en ny bil til database ved følgende JSON-format:
 # {
 #   "make": "MAKE_HERE",
 #   "model": "MODEL_HERE",
@@ -60,3 +61,12 @@ def createCar():
     insert_query = "INSERT INTO the_cars (id, make, model, year, gas_pr_km) VALUES (%s, %s, %s, %s, %s)"
     resultProxy = connection.execute(insert_query, (id, make, model, year, gas_pr_km))
     return jsonify(f'Succesfully inserted the car with the following data: {make} {model} {year} {gas_pr_km}, to the database.')
+
+# Opg 5 (Ekstra/BONUS opgave)
+# Lav et DELETE-endpoint "cars/{id}" som fjerner bilen fra databasen med det pågældende id.
+@app.route('/cars/add/<int:id>', methods=['DELETE'])
+def deleteCar(id):
+    delete_query = 'DELETE FROM the_cars WHERE id = ' + str(id)
+    connection.execute(delete_query)
+    return jsonify("Succesfully deleted the car")
+## ^^ Works, but should probably implement some error checking/validation on it. Eg, checking if the id actually exists first or not.
